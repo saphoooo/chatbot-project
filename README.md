@@ -19,6 +19,7 @@ $ ./chat
 $ cd bot # on a different terminal
 $ go build -o bot
 $ ./bot
+```
 
 ## Preview
 
