@@ -2,13 +2,13 @@ package main
 
 import (
 	"bytes"
-	"chatbot-project/trace"
 	"encoding/json"
 	"log"
 	"net/http"
 	"time"
 
 	"github.com/gorilla/websocket"
+	"github.com/saphoooo/tinychat/trace"
 )
 
 const (

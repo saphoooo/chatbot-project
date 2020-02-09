@@ -1,7 +1,6 @@
 package main
 
 import (
-	"chatbot-project/trace"
 	"flag"
 	"log"
 	"net/http"
@@ -9,6 +8,8 @@ import (
 	"path/filepath"
 	"sync"
 	"text/template"
+
+	"github.com/saphoooo/tinychat/trace"
 )
 
 type templateHandler struct {

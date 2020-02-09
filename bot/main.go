@@ -5,12 +5,23 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/gorilla/mux"
 )
 
 var chataddr = flag.String("chataddr", "localhost:8080", "http chat service address, et 127.0.0.0:8080")
 var port = flag.String("port", ":9090", "bot service port")
+var botAvatar = flag.String("avatar", "white", "bot avatar")
+
+func stringInSlice(s string, list []string) bool {
+	for _, avatar := range list {
+		if avatar == s {
+			return true
+		}
+	}
+	return false
+}
 
 func msgListener(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
@@ -22,7 +33,11 @@ func msgListener(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	avatarList := []string{"white", "black", "mustard", "olive", "rose", "violet"}
 	flag.Parse()
+	if !stringInSlice(strings.ToLower(*botAvatar), avatarList) {
+		log.Fatalf("avatar should be one of the following: %v\n", avatarList)
+	}
 	log.SetFlags(0)
 
 	rtr := mux.NewRouter()

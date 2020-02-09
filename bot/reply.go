@@ -5,6 +5,7 @@ import (
 	"log"
 	"math/rand"
 	"net/url"
+	"strings"
 	"time"
 
 	"github.com/gorilla/websocket"
@@ -31,24 +32,25 @@ func (m *Message) replyer(s string) {
 }
 
 func newMsg() *Message {
-	return &Message{Name: "beepbop", Bot: true, AvatarURL: "/avatars/bot.png"}
+	avatar := strings.ToLower(*botAvatar)
+	return &Message{Name: strings.Title(avatar), Bot: true, AvatarURL: "/avatars/" + avatar + ".png"}
 }
 
 func fallback() {
 	m := Message{}
 	var speech = []string{
-		"I didn't get that. Can you say it again?",
-		"I missed what you said. What was that?",
-		"Sorry, could you say that again?",
-		"Sorry, can you say that again?",
-		"Can you say that again?",
-		"Sorry, I didn't get that. Can you rephrase?",
-		"Sorry, what was that?",
-		"One more time?",
-		"What was that?",
-		"Say that one more time?",
-		"I didn't get that. Can you repeat?",
-		"I missed that, say that again?",
+		"Je n'ai pas compris. Pouvez-vous répéter ?",
+		"J'ai raté ce que vous avez dit. Qu'est-ce que c'était ?",
+		"Désolé, pourriez-vous répéter ?",
+		"Désolé, pouvez-vous répéter ?",
+		"Pouvez-vous répéter ?",
+		"Désolé, je n'ai pas compris. Pouvez-vous reformuler ?",
+		"Désolé, c'était quoi ?",
+		"Encore une fois ?",
+		"C'était quoi ?",
+		"Dites-le encore une fois ?",
+		"Je n'ai pas compris. Pouvez-vous répéter ?",
+		"J'ai raté ça, pouvez-vous le répète?",
 	}
 	rand.Seed(time.Now().UTC().UnixNano())
 	repl := speech[rand.Intn(len(speech))]
