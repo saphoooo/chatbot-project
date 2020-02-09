@@ -10,7 +10,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var chataddr = flag.String("chataddr", "localhost:8080", "http chat service address, et 127.0.0.0:8080")
+var chataddr = flag.String("chataddr", "localhost:8080", "http chat service address")
 var port = flag.String("port", ":9090", "bot service port")
 var botAvatar = flag.String("avatar", "white", "bot avatar")
 

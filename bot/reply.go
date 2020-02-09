@@ -13,7 +13,6 @@ import (
 
 func (m *Message) replyer(s string) {
 	u := url.URL{Scheme: "ws", Host: *chataddr, Path: "/room"}
-	//log.Printf("connecting to %s", u.String())
 	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
 	if err != nil {
 		log.Fatal("dial:", err)
@@ -50,7 +49,7 @@ func fallback() {
 		"C'était quoi ?",
 		"Dites-le encore une fois ?",
 		"Je n'ai pas compris. Pouvez-vous répéter ?",
-		"J'ai raté ça, pouvez-vous le répète?",
+		"J'ai raté ça, pouvez-vous le répèter ?",
 	}
 	rand.Seed(time.Now().UTC().UnixNano())
 	repl := speech[rand.Intn(len(speech))]

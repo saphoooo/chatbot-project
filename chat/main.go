@@ -4,12 +4,9 @@ import (
 	"flag"
 	"log"
 	"net/http"
-	"os"
 	"path/filepath"
 	"sync"
 	"text/template"
-
-	"github.com/saphoooo/tinychat/trace"
 )
 
 type templateHandler struct {
@@ -29,7 +26,6 @@ func main() {
 	var botURL = flag.String("botURL", "localhost:9090", "The address of the bot, eg localhost:9090")
 	flag.Parse()
 	r := newRoom()
-	r.tracer = trace.New(os.Stdout)
 	http.Handle("/", &templateHandler{filename: "chat.html"})
 	http.Handle("/room", r)
 	http.Handle("/avatars/", http.StripPrefix("/avatars/", http.FileServer(http.Dir("./avatars"))))
