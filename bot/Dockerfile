@@ -1,4 +1,4 @@
-FROM golang:1.14rc1-buster as builder
+FROM golang:rc-alpine3.11 as builder
 
 ENV GO111MODULE=on
 
