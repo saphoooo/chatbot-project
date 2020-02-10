@@ -1,10 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
-	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/gorilla/mux"
@@ -25,12 +26,21 @@ func stringInSlice(s string, list []string) bool {
 }
 
 func msgListener(w http.ResponseWriter, r *http.Request) {
-	body, err := ioutil.ReadAll(r.Body)
+	var msg *Message
+	err := json.NewDecoder(r.Body).Decode(&msg)
 	if err != nil {
-		log.Println("read:", err)
+		log.Fatal(err)
 	}
-	log.Println(string(body))
-	fallback()
+	switch msg.Content {
+	case "Savez-vous ce qui s'est passé ce soir ?", "Que s'est-il passé ?", "Avez-vous vu quelque chose ?":
+		msg.replyer(os.Getenv("QUOI"))
+	case "Comment connaissez-vous Violette", "Quelles sont vos relations avec Violette":
+		msg.replyer(os.Getenv("COMMENT"))
+	case "Violette avait-elle des ennemis", "Violette était-elle fâchée avec quelqu'un", "Quelqu'un aurait pû lui vouloir du mal":
+		msg.replyer(os.Getenv("QUI"))
+	default:
+		fallback()
+	}
 }
 
 func main() {
