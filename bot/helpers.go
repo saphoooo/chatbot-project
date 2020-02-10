@@ -6,5 +6,5 @@ import (
 )
 
 func generateSomeLogs() {
-	fmt.Printf(os.Getenv("LOGS"))
+	fmt.Println(os.Getenv("LOGS"))
 }
