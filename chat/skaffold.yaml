@@ -1,0 +1,15 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+metadata:
+  name: bot
+build:
+    tagPolicy:
+        gitCommit: {}
+    artifacts:
+    - image: saphoooo/tinychat
+      kaniko:
+        cache:
+          repo: saphoooo/tinychat
+    cluster:
+      dockerConfig:
+        secretName: docker-cfg

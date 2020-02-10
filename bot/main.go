@@ -13,6 +13,7 @@ import (
 var chataddr = flag.String("chataddr", "localhost:8080", "http chat service address")
 var port = flag.String("port", ":9090", "bot service port")
 var botAvatar = flag.String("avatar", "white", "bot avatar")
+var debug = flag.Bool("debug", false, "activate debug mode")
 
 func stringInSlice(s string, list []string) bool {
 	for _, avatar := range list {
@@ -40,10 +41,14 @@ func main() {
 	}
 	log.SetFlags(0)
 
+	generateSomeLogs()
+
 	rtr := mux.NewRouter()
 	rtr.HandleFunc("/bot", msgListener).Methods("POST")
 	http.Handle("/", rtr)
-	log.Println("Start bot service on", *port)
+	if *debug {
+		log.Println("Start bot service on", *port)
+	}
 	err := http.ListenAndServe(*port, nil)
 	if err != nil {
 		log.Fatal(err)

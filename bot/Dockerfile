@@ -8,7 +8,7 @@ WORKDIR /app
 
 RUN CGO_ENABLED=0 go build -o bot
 
-FROM scratch
+FROM alpine:3.9
 
 COPY --from=builder /app/bot .
 

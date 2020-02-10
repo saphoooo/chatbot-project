@@ -1,0 +1,15 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+metadata:
+  name: bot
+build:
+    tagPolicy:
+        gitCommit: {}
+    artifacts:
+    - image: saphoooo/tinybot
+      kaniko:
+        cache:
+          repo: saphoooo/tinybot
+    cluster:
+      dockerConfig:
+        secretName: docker-cfg
