@@ -34,7 +34,7 @@ func msgListener(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	avatarList := []string{"white", "black", "mustard", "olive", "rose", "violet"}
+	avatarList := []string{"blanc", "reglisse", "moutarde", "olive", "rose", "violette"}
 	flag.Parse()
 	if !stringInSlice(strings.ToLower(*botAvatar), avatarList) {
 		log.Fatalf("avatar should be one of the following: %v\n", avatarList)

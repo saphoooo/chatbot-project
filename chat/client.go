@@ -20,7 +20,7 @@ func (c *client) read() {
 			if msg.Name == "" {
 				msg.Name = "me"
 				if msg.AvatarURL == "" {
-					msg.AvatarURL = "/avatars/me.png"
+					msg.AvatarURL = "/avatars/moi.png"
 				}
 			}
 			c.room.forward <- msg
